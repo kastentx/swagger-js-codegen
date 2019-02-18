@@ -11,6 +11,7 @@
 
     {{#isES6}}let{{/isES6}}{{^isES6}}var{{/isES6}} request = require('request');
     {{#isES6}}let{{/isES6}}{{^isES6}}var{{/isES6}} Q = require('q');
+    {{#isES6}}let{{/isES6}}{{^isES6}}var{{/isES6}} fileType = require('file-type');
 
     function {{&className}}(options){
         {{#isES6}}let{{/isES6}}{{^isES6}}var{{/isES6}} domain = (typeof options === 'object') ? options.domain : options;
