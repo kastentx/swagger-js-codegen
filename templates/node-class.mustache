@@ -65,7 +65,7 @@
             body: body
         };
         if(Object.keys(form).length > 0) {
-            if (if req.headers['Content-Type'] && req.headers['Content-Type'][0] === 'multipart/form-data') {
+            if (req.headers['Content-Type'] && req.headers['Content-Type'][0] === 'multipart/form-data') {
                 delete req.body;
                 var keyName = Object.keys(form)[0]
                 req.formData = {
