@@ -64,20 +64,24 @@
             headers: headers,
             body: body
         };
-        if(Object.keys(form).length > 0 && req.headers['Content-Type'][0] == 'multipart/form-data') {
-            delete req.body;
-            var keyName = Object.keys(form)[0]
-            req.formData = {
-                [keyName]: {
-                    value: form[keyName],
-                    options: {
-                        filename: `file.${fileType(form[keyName]).ext}`
+        if(Object.keys(form).length > 0) {
+            if (req.headers['Content-Type'][0] !== 'multipart/form-data') {
+                req.form = form;
+            } else if (req.headers['Content-Type'][0] === 'multipart/form-data') {
+                delete req.body;
+                var keyName = Object.keys(form)[0]
+                req.formData = {
+                    [keyName]: {
+                        value: form[keyName],
+                        options: {
+                            filename: `file.${ fileType(form[keyName]).ext }`
+                        }
                     }
-                }
-            };
-        } else if(Object.keys(form).length > 0) {
-            req.form = form;
+                };
+            }
         }
+            
+
         if(typeof(body) === 'object' && !(body instanceof Buffer)) {
             req.json = true;
         }
